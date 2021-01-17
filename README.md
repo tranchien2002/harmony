@@ -21,6 +21,26 @@ There will be validators at each bridge to verify the atomic swaps, when **75%**
 
 In order to be able to transfer the equivalent value of tokens, for example **ETH -> ONE**, **KNC (ERC20) -> WETH (HRC20)**, we use price data taken from **Band Oracle**.
 
+## Usage
+
+### **Ethereum -> Harmony**
+
+- ETH -> ONE
+- ETH -> Wrapped ETH
+- ERC20 -> ONE
+- ERC20 -> HRC20
+- Wrapped ONE (ERC20) -> ONE
+
+### **Harmony -> Ethereum**
+
+- ONE -> ETH
+- ONE -> Wrapped ONE
+- HRC20 -> ERC20
+- Wrapped ETH (HRC20) -> ETH
+- HRC20 -> ETH
+
+###
+
 ## Architecture
 
 ### Sequence Diagram
@@ -40,3 +60,33 @@ On the ethereum side, when a user performs transactions to swap to Harmony, the 
 ### Swap
 
 There are 2 BridgeBank contracts on 2 sides that are responsible for receiving transactions to swap tokens and emit out events for the other contract. Contract on that side will be based on the price data taken from the **Band Protocol** to be able to unlock the corresponding amount of tokens. Before being unlocked, the transaction will have to get **75% validator** approval
+
+## Technique
+
+### Frontend:
+
+<image src='./readme-images/reactjs.png' width='50%'/>
+
+### Oracle Protocol:
+
+<image src='./readme-images/band.png' width='50%' padding='20%'/>
+
+### Lengding platform:
+
+<image src='./readme-images/aave.jpg' width='50%'>
+
+### Smart contract:
+
+- Main contract in Harmony:
+
+  - BridgeBank.sol
+  - BridgeRegistry.sol
+  - EthereumBridge.sol
+  - Valset.sol
+
+- Main contract in Ethereum:
+
+  - BridgeBank.sol
+  - BridgeRegistry.sol
+  - HarmonyBridge.sol
+  - Valset.sol
